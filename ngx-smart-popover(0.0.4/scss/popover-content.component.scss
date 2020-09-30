@@ -1,0 +1,170 @@
+$popover-bg: #757575;
+$popover-inner-padding: 1.2rem;
+$zindex-popover: 1060;
+$popover-arrow-width: 2.2rem;
+$popover-arrow-height: 1.1rem;
+$popover-arrow-outer-width: ($popover-arrow-width + 0.1rem);
+$popover-arrow-outer-color: fade-in($popover-bg, .05);
+$popover-arrow-color: $popover-bg;
+$popover-header-bg: darken($popover-bg, 3%);
+$popover-border-width: 0rem;
+
+.popover {
+    .virtual-area {
+        height: 11px;
+        width: 100%;
+        position: absolute;
+    }
+    &.bs-popover-top .virtual-area {
+        bottom: -11px; 
+    }
+    &.bs-popover-bottom .virtual-area {
+        top: -11px; 
+    }
+    &.bs-popover-left .virtual-area {
+        right: -11px; 
+    }
+    &.bs-popover-right .virtual-area {
+        left: -11px; 
+    }
+}
+
+.popover {
+    background-color: $popover-bg;
+    box-shadow: 0 .2rem .4rem 0 rgba(0,0,0,0.15);
+    border: none;
+    padding: $popover-inner-padding;
+    z-index: $zindex-popover;
+    max-width: none;
+    
+    &.sm {
+        width: 20rem;
+    }
+
+    &.md-sm {
+        width: 26rem;
+    }
+
+    &.md {
+        width: 34rem;
+    }
+
+    &.lg {
+        width: 40rem;
+    }
+
+    .popover-header {
+        color: white;
+        font-size: 1.6rem;
+        font-weight: bold;
+        line-height: 2.1rem;
+    }
+
+    .popover-body {
+        color: white;
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    &.bs-popover {
+        // These all define distance from the target to render
+        &-left {
+            margin-left: -1.5rem;
+        }
+        &-right {
+            margin-left: 1.5rem;
+        }
+        &-top, &-topRight, &-topLeft {
+            margin-top: -1.5rem;
+        }
+        &-bottom, &-bottomRight, &-bottomLeft {
+            margin-top: 1.5rem;
+        }
+
+        &-right, &-left {
+            .arrow {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        &-top, &-bottom {
+            .arrow {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        &-topRight, &-topLeft {
+            margin-bottom: $popover-arrow-height;
+
+            .arrow {
+                bottom: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
+            }
+
+            .arrow::before,
+            .arrow::after {
+                border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+            }
+
+            .arrow::before {
+                bottom: 0;
+                border-top-color: $popover-arrow-outer-color;
+            }
+
+            .arrow::after {
+                bottom: $popover-border-width;
+                border-top-color: $popover-arrow-color;
+            }
+        }
+
+        &-bottomRight, &-bottomLeft {
+            margin-top: $popover-arrow-height;
+
+            .arrow {
+                top: calc((#{$popover-arrow-height} + #{$popover-border-width}) * -1);
+            }
+
+            .arrow::before,
+            .arrow::after {
+                border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+            }
+
+            .arrow::before {
+                top: 0;
+                border-bottom-color: $popover-arrow-outer-color;
+            }
+
+            .arrow::after {
+                top: $popover-border-width;
+                border-bottom-color: $popover-arrow-color;
+            }
+        
+            // This will remove the popover-header's border just below the arrow
+            .popover-header::before {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                display: block;
+                width: $popover-arrow-width;
+                margin-left: ($popover-arrow-width / -2);
+                content: "";
+                border-bottom: $popover-border-width solid $popover-header-bg;
+            }
+        }
+
+        &-topRight, &-bottomRight {
+            transform: translateX(-2rem);
+            .arrow {
+                left: 1.5rem;
+            }
+        }
+
+        &-topLeft, &-bottomLeft {
+            transform: translateX(2rem);
+            .arrow {
+                right: 1.5rem;
+            }
+        }
+    }
+}
